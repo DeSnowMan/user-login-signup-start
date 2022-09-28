@@ -48,9 +48,10 @@ function AddUser(Name, Pass, confirmPass) {
   let User = {Name: Name, Password: Pass};
   
   if (Pass === confirmPass) {
+    
     Users.push(User);
     saveUsers()
-    SignIn(Name, Pass, SecondPass); 
+    CheckUser(Name, Pass); 
   
   } else {
     Error.innerHTML = `Passwords Don't Match`;
@@ -65,8 +66,15 @@ function AddUser(Name, Pass, confirmPass) {
   console.log("Swag money");
 }
 
-function CheckUser() {
-
+// Loops through the array of users to see if the name given isn't being used by an existing user
+function CheckUser(Name, Pass) {
+  for (let i = 0; i < Users.length; i++) {
+    if (Name === Users[i].Name) {
+      return Error.innerHTML = 'Username Is Already Being Used';
+    } else {
+      SignIn(Name, Pass);
+    }
+  }
 };
 
 
